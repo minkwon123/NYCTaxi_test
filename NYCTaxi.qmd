@@ -48,11 +48,7 @@ df_right = pd.concat([transform(df) for i, df in df_small.groupby('id')]).reset_
 df_small2 = df_left.merge(df_right)
 df_small2.head()
 
-```
-
-# 기말고사1-(1)
-```{python}
-#| title: 요일,시간에 따른 평균속력 시각화      
+# 요일, 시간 평균속력 시각화
 tidydata = df.pivot_table(
     index = 'pickup_hour',
     columns = 'dayofweek',
@@ -77,12 +73,8 @@ fig1['layout'] = {
     'xaxis':{'title':'pickup 시간'},
     'yaxis':{'title':'요일'}, 
 }
-fig1.show()
-```
 
-# 기말고사1-(2)
-```{python}
-#| title: 요일,시간에 따른 평균이동거리 시각화
+# 평균이동거리
 tidydata = df.pivot_table(
     index = 'pickup_hour',
     columns = 'dayofweek',
@@ -107,12 +99,8 @@ fig2['layout'] = {
     'xaxis':{'title':'pickup 시간'},
     'yaxis':{'title':'요일'}, 
 }
-fig2.show()
-```
 
-# 기말고사1-(3)
-```{python}
-#| title: 속력별 경로 시각화
+# 속력별 경로 시각화
 tidydata = df_small2.assign(
     speed_cut = pd.qcut(df_small2['speed'], 4, labels = ['매우 느림', '느림', '빠름', '매우 빠름'])
 ).sort_values('speed_cut')
@@ -159,5 +147,21 @@ for i in range(146):
 for i in range(146, 150):
     fig3.data[i].name += ' (pickup/dropoff)'
     
+
+```
+
+# 기말고사1-(1)
+```{python}
+#| title: 요일,시간에 따른 평균속력 시각화      
+fig1.show()
+
+# 기말고사1-(2)
+#| title: 요일,시간에 따른 평균이동거리 시각화
+fig2.show()
+```
+
+# 기말고사1-(3)
+```{python}
+#| title: 속력별 경로 시각화
 fig3.show()
 ```
